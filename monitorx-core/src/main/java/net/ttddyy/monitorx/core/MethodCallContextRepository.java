@@ -3,6 +3,6 @@ package net.ttddyy.monitorx.core;
 /**
  * @author Tadaya Tsuyukubo
  */
-public interface MethodCallContextPersistStrategy {
+public interface MethodCallContextRepository {
     void persist(MethodCallContext context);
 }

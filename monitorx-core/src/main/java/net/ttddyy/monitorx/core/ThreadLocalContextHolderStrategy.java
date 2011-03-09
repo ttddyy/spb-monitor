@@ -7,8 +7,10 @@ public class ThreadLocalContextHolderStrategy implements MethodCallContextHolder
 
     private static ThreadLocal<MethodCallContext> contextHolder = new ThreadLocal<MethodCallContext>();
 
+    private MethodCallContextPolicy contextPolicy = MethodCallContextPolicy.ALWAYS_CREATE;
+
     public MethodCallContext getContext() {
-        if (contextHolder.get() == null) {
+        if (MethodCallContextPolicy.ALWAYS_CREATE == contextPolicy && contextHolder.get() == null) {
             contextHolder.set(new MethodCallContext());
         }
 
@@ -21,5 +23,13 @@ public class ThreadLocalContextHolderStrategy implements MethodCallContextHolder
 
     public void clearContext() {
         contextHolder.set(null);
+    }
+
+    public boolean hasContext() {
+        if (MethodCallContextPolicy.ALWAYS_CREATE == contextPolicy) {
+            return true;
+        } else {
+            return contextHolder.get() != null;
+        }
     }
 }

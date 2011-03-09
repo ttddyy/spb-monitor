@@ -17,4 +17,8 @@ public class MethodCallContextHolder {
     public static void clearContext() {
         strategy.clearContext();
     }
+
+    public static boolean hasContext() {
+        return strategy.hasContext();
+    }
 }

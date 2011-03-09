@@ -11,4 +11,6 @@ public interface MethodCallContextHolderStrategy {
 
     void clearContext();
 
+    boolean hasContext();
+
 }

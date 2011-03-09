@@ -7,14 +7,14 @@ import org.springframework.context.ApplicationListener;
  */
 public class MethodCallContextPersistEventListener implements ApplicationListener<MethodCallContextPersistEvent> {
 
-    private MethodCallContextPersistStrategy strategy;
+    private MethodCallContextRepository repository;
 
     public void onApplicationEvent(MethodCallContextPersistEvent event) {
         final MethodCallContext context = event.getContext();
-        strategy.persist(context);  // delegate to strategy
+        repository.persist(context);  // delegate to repository
     }
 
-    public void setStrategy(MethodCallContextPersistStrategy strategy) {
-        this.strategy = strategy;
+    public void setRepository(MethodCallContextRepository repository) {
+        this.repository = repository;
     }
 }

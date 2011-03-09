@@ -14,8 +14,13 @@ public class MethodCallAdvice implements MethodInterceptor {
 
     public Object invoke(MethodInvocation invocation) throws Throwable {
 
+        // call manager only when context exists.
+        if (!MethodCallContextHolder.hasContext()) {
+            return invocation.proceed();
+        }
+
         // TODO: change to use @ExcludeMonitoring annotation
-        Object target = invocation.getThis();
+        final Object target = invocation.getThis();
         if (target.equals(manager) || target instanceof MethodCallEventListener) {
             return invocation.proceed();
         }

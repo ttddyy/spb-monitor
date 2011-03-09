@@ -12,6 +12,15 @@ import java.lang.reflect.Method;
 @ExcludeMonitoring
 public class MonitorxManagerImpl implements MonitorxManager, ApplicationEventPublisherAware {
 
+    public static void enable() {
+
+    }
+
+    public static void disable() {
+
+    }
+
+
     private ApplicationEventPublisher eventPublisher;
 
     public void beforeMethod(MethodInvocation invocation) {
@@ -51,13 +60,17 @@ public class MonitorxManagerImpl implements MonitorxManager, ApplicationEventPub
     }
 
     public void finalizeContext() {
-        final MethodCallContext context = MethodCallContextHolder.getContext();
-
         // TODO: persist context (if not empty??)
-
+        persistContext();
 
         // clear the context
         MethodCallContextHolder.clearContext();
+    }
+
+    private void persistContext() {
+        final MethodCallContext context = MethodCallContextHolder.getContext();
+        final MethodCallContextPersistEvent event = new MethodCallContextPersistEvent(this, context);
+        eventPublisher.publishEvent(event);
     }
 
     public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
