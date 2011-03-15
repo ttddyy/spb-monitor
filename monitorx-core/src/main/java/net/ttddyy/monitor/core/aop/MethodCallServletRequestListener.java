@@ -1,4 +1,4 @@
-package net.ttddyy.monitor.core;
+package net.ttddyy.monitor.core.aop;
 
 import org.springframework.context.ApplicationListener;
 import org.springframework.web.context.support.ServletRequestHandledEvent;

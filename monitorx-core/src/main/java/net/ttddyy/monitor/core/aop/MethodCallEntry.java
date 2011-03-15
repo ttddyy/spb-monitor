@@ -1,4 +1,4 @@
-package net.ttddyy.monitor.core;
+package net.ttddyy.monitor.core.aop;
 
 import java.io.Serializable;
 

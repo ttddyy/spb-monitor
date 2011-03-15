@@ -1,4 +1,4 @@
-package net.ttddyy.monitor.core;
+package net.ttddyy.monitor.core.aop;
 
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.autoproxy.AbstractAdvisorAutoProxyCreator;

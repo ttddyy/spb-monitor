@@ -1,4 +1,4 @@
-package net.ttddyy.monitor.core;
+package net.ttddyy.monitor.core.aop;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.InvocationTargetException;

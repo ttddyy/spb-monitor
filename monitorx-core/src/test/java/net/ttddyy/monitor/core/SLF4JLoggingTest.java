@@ -1,5 +1,6 @@
 package net.ttddyy.monitor.core;
 
+import net.ttddyy.monitor.core.aop.MethodCallAdvice;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.Advised;
 import org.springframework.aop.framework.ProxyFactory;
