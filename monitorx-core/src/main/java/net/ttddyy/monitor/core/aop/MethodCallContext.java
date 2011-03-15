@@ -1,5 +1,6 @@
 package net.ttddyy.monitor.core.aop;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,7 +9,7 @@ import java.util.List;
  */
 
 // TODO: should this to be Serializable
-public class MethodCallContext {
+public class MethodCallContext implements Serializable {
 
     private List<MethodCallEntry> entries = new ArrayList<MethodCallEntry>();
 
