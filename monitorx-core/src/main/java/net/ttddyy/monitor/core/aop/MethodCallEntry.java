@@ -8,6 +8,7 @@ import java.io.Serializable;
 public class MethodCallEntry implements Serializable {
 
     private MethodCallType callType;
+    private String className;
     private String methodName;
 
     private String note;
@@ -18,6 +19,14 @@ public class MethodCallEntry implements Serializable {
 
     public void setCallType(MethodCallType callType) {
         this.callType = callType;
+    }
+
+    public String getClassName() {
+        return className;
+    }
+
+    public void setClassName(String className) {
+        this.className = className;
     }
 
     public String getMethodName() {

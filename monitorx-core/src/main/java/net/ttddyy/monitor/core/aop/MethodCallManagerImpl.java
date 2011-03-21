@@ -33,7 +33,7 @@ public class MethodCallManagerImpl implements MethodCallManager, ApplicationEven
         // translator to transform arguments
 
         final MethodCallEntry entry = getEntry(callType, invocation);
-        context.addEvent(entry);
+        context.addEntry(entry);
 
         // fire event
         final MethodCallEvent event = new MethodCallEvent(this, entry);
@@ -42,10 +42,14 @@ public class MethodCallManagerImpl implements MethodCallManager, ApplicationEven
 
     private MethodCallEntry getEntry(MethodCallType callType, MethodInvocation invocation) {
         final Method method = invocation.getMethod();
+        final String className = method.getDeclaringClass().getName();
+        final String methodName = method.getName();
+
 
         final MethodCallEntry entry = new MethodCallEntry();
         entry.setCallType(callType);
-        entry.setMethodName(method.getName());
+        entry.setClassName(className);
+        entry.setMethodName(methodName);
 
         return entry;
     }

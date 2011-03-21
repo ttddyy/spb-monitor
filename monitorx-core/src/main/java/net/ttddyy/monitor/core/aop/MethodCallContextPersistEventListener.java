@@ -11,7 +11,10 @@ public class MethodCallContextPersistEventListener implements ApplicationListene
 
     public void onApplicationEvent(MethodCallContextPersistEvent event) {
         final MethodCallContext context = event.getContext();
-        repository.persist(context);  // delegate to repository
+
+        if (context.hasEntry()) {
+            repository.persist(context);  // delegate to repository
+        }
     }
 
     public void setRepository(MethodCallContextRepository repository) {

@@ -13,7 +13,15 @@ public class MethodCallContext implements Serializable {
 
     private List<MethodCallEntry> entries = new ArrayList<MethodCallEntry>();
 
-    public boolean addEvent(MethodCallEntry entry) {
+    public List<MethodCallEntry> getEntries() {
+        return entries;
+    }
+
+    public boolean hasEntry() {
+        return !entries.isEmpty();
+    }
+
+    public boolean addEntry(MethodCallEntry entry) {
         return entries.add(entry);
     }
 }

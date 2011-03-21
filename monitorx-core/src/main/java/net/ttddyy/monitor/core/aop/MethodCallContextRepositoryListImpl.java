@@ -14,4 +14,9 @@ public class MethodCallContextRepositoryListImpl implements MethodCallContextRep
     public void persist(MethodCallContext context) {
         list.add(context);
     }
+
+    public List<MethodCallContext> getAll() {
+        // TODO: should it be Collections.unmodifiableList() ??
+        return new ArrayList<MethodCallContext>(list);
+    }
 }
