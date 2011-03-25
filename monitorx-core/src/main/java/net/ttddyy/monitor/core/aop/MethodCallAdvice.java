@@ -4,6 +4,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 
 import javax.annotation.Resource;
+import java.util.UUID;
 
 /**
  * @author Tadaya Tsuyukubo
@@ -24,22 +25,26 @@ public class MethodCallAdvice implements MethodInterceptor {
         if (target.equals(manager) || target instanceof MethodCallEventListener) {
             return invocation.proceed();
         }
-        ////////
+
+        /////////
+        // internally use this id to keep truck of before & after method call
+        final String invocationId = UUID.randomUUID().toString();
+
 
         final long currentTime = System.currentTimeMillis();
 
-        manager.beforeMethod(invocation);
+        manager.beforeMethod(invocation, invocationId);
 
         final Object retVal;
         try {
             retVal = invocation.proceed();
         } catch (Throwable e) {
             final long processTime = currentTime - System.currentTimeMillis();
-            manager.afterThrow(invocation, processTime, e);
+            manager.afterThrow(invocation, invocationId, processTime, e);
             throw e;
         }
         final long processTime = currentTime - System.currentTimeMillis();
-        manager.afterMethod(invocation, processTime);
+        manager.afterMethod(invocation, invocationId, processTime);
 
         return retVal;
     }

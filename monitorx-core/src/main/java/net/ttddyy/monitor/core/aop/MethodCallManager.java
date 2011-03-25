@@ -7,11 +7,11 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public interface MethodCallManager {
 
-    void beforeMethod(MethodInvocation invocation);
+    void beforeMethod(MethodInvocation invocation, String invocationId);
 
-    void afterMethod(MethodInvocation invocation, long processTime);
+    void afterMethod(MethodInvocation invocation, String invocationId, long processTime);
 
-    void afterThrow(MethodInvocation invocation, long processTime, Throwable throwable);
+    void afterThrow(MethodInvocation invocation, String invocationId, long processTime, Throwable throwable);
 
     void finalizeContext();
 
