@@ -13,6 +13,7 @@ public class MethodCallEntry implements Serializable {
     private String methodName;
     private long proceeTime;
     private long timestamp;
+    private Throwable throwable;
 
     private String note;
 
@@ -62,6 +63,14 @@ public class MethodCallEntry implements Serializable {
 
     public void setTimestamp(long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Throwable getThrowable() {
+        return throwable;
+    }
+
+    public void setThrowable(Throwable throwable) {
+        this.throwable = throwable;
     }
 
     public String getNote() {

@@ -34,26 +34,28 @@ public class MethodCallManagerImpl implements MethodCallManager, ApplicationEven
     public void beforeMethod(MethodInvocation invocation, String invocationId) {
         final Integer pairId = getNewPairId();
         invocationIdToPairId.put(invocationId, pairId); // keep invocationId for afterMethod & afterThrow
-        onCall(MethodCallType.BEFORE_METHOD, invocation, pairId, 0);
+        onCall(MethodCallType.BEFORE_METHOD, invocation, pairId, 0, null);
     }
 
     public void afterMethod(MethodInvocation invocation, String invocationId, long processTime) {
         final Integer pairId = invocationIdToPairId.remove(invocationId);
-        onCall(MethodCallType.AFTER_METHOD, invocation, pairId, processTime);
+        onCall(MethodCallType.AFTER_METHOD, invocation, pairId, processTime, null);
     }
 
     public void afterThrow(MethodInvocation invocation, String invocationId, long processTime, Throwable throwable) {
+
         final Integer pairId = invocationIdToPairId.remove(invocationId);
-        onCall(MethodCallType.AFTER_THROW, invocation, pairId, processTime);
+        onCall(MethodCallType.AFTER_THROW, invocation, pairId, processTime, throwable);
     }
 
-    private void onCall(MethodCallType callType, MethodInvocation invocation, Integer pairId, long processTime) {
+    private void onCall(MethodCallType callType, MethodInvocation invocation, Integer pairId, long processTime,
+                        Throwable throwable) {
         final MethodCallContext context = MethodCallContextHolder.getContext();
 
         // create entry
         // translator to transform arguments
 
-        final MethodCallEntry entry = getNewEntry(callType, invocation, pairId, processTime);
+        final MethodCallEntry entry = getNewEntry(callType, invocation, pairId, processTime, throwable);
         context.addEntry(entry);
 
         // fire event
@@ -61,7 +63,8 @@ public class MethodCallManagerImpl implements MethodCallManager, ApplicationEven
         eventPublisher.publishEvent(event);
     }
 
-    private MethodCallEntry getNewEntry(MethodCallType callType, MethodInvocation invocation, Integer pairId, long processTime) {
+    private MethodCallEntry getNewEntry(MethodCallType callType, MethodInvocation invocation, Integer pairId,
+                                        long processTime, Throwable throwable) {
         final Method method = invocation.getMethod();
         final String className = method.getDeclaringClass().getName();
         final String methodName = method.getName();
@@ -74,6 +77,7 @@ public class MethodCallManagerImpl implements MethodCallManager, ApplicationEven
         entry.setMethodName(methodName);
         entry.setTimestamp(System.currentTimeMillis());
         entry.setProceeTime(processTime);
+        entry.setThrowable(throwable);
 
         return entry;
     }
