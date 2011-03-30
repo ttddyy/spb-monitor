@@ -2,6 +2,7 @@ package net.ttddyy.monitor.core.aop;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
+import org.springframework.aop.framework.AopInfrastructureBean;
 
 import javax.annotation.Resource;
 import java.util.UUID;
@@ -9,7 +10,7 @@ import java.util.UUID;
 /**
  * @author Tadaya Tsuyukubo
  */
-public class MethodCallAdvice implements MethodInterceptor {
+public class MethodCallAdvice implements MethodInterceptor, AopInfrastructureBean {
 
     private MethodCallManager manager;
 
