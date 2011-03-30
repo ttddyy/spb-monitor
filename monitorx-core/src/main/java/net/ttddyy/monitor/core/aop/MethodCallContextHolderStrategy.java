@@ -5,7 +5,7 @@ package net.ttddyy.monitor.core.aop;
  */
 public interface MethodCallContextHolderStrategy {
 
-    MethodCallContext getContext();
+    <T extends MethodCallContext> T getContext();
 
     void setContext(MethodCallContext context);
 

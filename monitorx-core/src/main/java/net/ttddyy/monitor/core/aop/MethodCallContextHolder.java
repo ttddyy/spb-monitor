@@ -6,8 +6,9 @@ package net.ttddyy.monitor.core.aop;
 public class MethodCallContextHolder {
     private static MethodCallContextHolderStrategy strategy = new ThreadLocalContextHolderStrategy();
 
-    public static MethodCallContext getContext() {
-        return strategy.getContext();
+    @SuppressWarnings("unchecked")
+    public static <T extends MethodCallContext> T getContext() {
+        return (T)strategy.getContext();
     }
 
     public static void setContext(MethodCallContext context) {

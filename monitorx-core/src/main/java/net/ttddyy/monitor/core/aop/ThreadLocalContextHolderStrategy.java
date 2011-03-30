@@ -9,12 +9,13 @@ public class ThreadLocalContextHolderStrategy implements MethodCallContextHolder
 
     private MethodCallContextPolicy contextPolicy = MethodCallContextPolicy.ALWAYS_CREATE;
 
-    public MethodCallContext getContext() {
+    @SuppressWarnings("unchecked")
+    public <T extends MethodCallContext> T getContext() {
         if (MethodCallContextPolicy.ALWAYS_CREATE == contextPolicy && contextHolder.get() == null) {
             contextHolder.set(new MethodCallContext());
         }
 
-        return contextHolder.get();
+        return (T) contextHolder.get();
     }
 
     public void setContext(MethodCallContext context) {
