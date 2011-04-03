@@ -14,6 +14,12 @@ public class MetricManagerImpl implements MetricManager {
     // full path : metric
     private Map<String, Metric> metricMap = new HashMap<String, Metric>();
 
+    public void setMetrics(List<Metric> metrics) {
+        for (Metric metric : metrics) {
+            addMetric(metric);
+        }
+    }
+
     public void addMetric(Metric metric) {
         metricMap.putAll(getMetricMap(metric));
     }
